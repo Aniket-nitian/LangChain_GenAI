@@ -20,8 +20,9 @@ parser = StrOutputParser()
 
 joke_gen_chain = RunnableSequence(prompt, model, parser)
 
+# We want to run the joke generation and word count in parallel, so we can get the joke and its word count at the same time.
 parallel_chain = RunnableParallel({
-    'joke': RunnablePassthrough(),
+    'joke': RunnablePassthrough(), 
     'word_count': RunnableLambda(word_count)
 })
 
